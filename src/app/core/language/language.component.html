@@ -1,0 +1,53 @@
+
+<div class="container">
+  <div *ngIf="showDiv">
+    <form>
+      <div class="form-row">
+        <label>Language Name:</label>
+        <input [(ngModel)]="newLanguage.languageName" name="languageName" required class="inputTxt">
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="success-message">{{successMessage}}</div>
+      </div>
+      <div class="button-container">
+        <button class="auto-button"(click)="addLanguage()" >Add</button>
+        <button class="auto-button" (click)="update(newLanguage.languageName)">Update</button>
+      </div>
+     </form>
+  </div>
+
+  <div class="table-container" *ngIf="languageList.length > 0">
+    <div *ngIf="hideDiv">
+      <div class="button-container"><button class="auto-button" (click)="NewAddLang()" >New Language Add</button></div>
+        <div *ngIf="successMessage" class="success-message"> {{ successMessage }} </div>
+        <div class="container mt-4">
+          <div class="table-responsive table-container">
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="table-primary">
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Language</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let lang of languageList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ lang.languageName }}</td>
+                  <td>{{ lang.dateCreated | date: 'yyyy-MM-dd' }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary me-1" (click)="editLanguage(i, lang.languageName)" title="Edit">
+                      <i class="bi bi-pencil-fill" ></i>  </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteLanguage(i)" title="Delete">
+                      <i class="bi bi-trash-fill"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>  
+  </div>
+</div>

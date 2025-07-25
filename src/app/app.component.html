@@ -1,13 +1,4 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
+<style> 
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 14px;
@@ -246,16 +237,25 @@
       </svg>
     </a>
 </div>
-
-  <div class="content" role="main">
-     <nav>
-      <a routerLink="/login">Login</a> |
-      <a routerLink="/register">Register</a> |
-      <a routerLink="/dashboard">Dashboard</a> |
-      <a routerLink="/products">Products</a>
-    </nav>
+<div style="display: flex; width: 100%;">
+  <nav style="min-width: 180px; background: #f5f5f5; padding: 24px 0 24px 16px; height: 100vh; box-shadow: 2px 0 8px rgba(0,0,0,0.04);">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <li style="margin-bottom: 16px;"><a routerLink="/login">Login</a></li>
+      <li style="margin-bottom: 16px;"><a routerLink="/register">Register</a></li>
+      <li style="margin-bottom: 16px;"><a routerLink="/dashboard">Dashboard</a></li>
+      <li style="margin-bottom: 16px;"><a routerLink="/language">Language</a></li>
+      <li style="margin-bottom: 16px;"><a routerLink="/book">Book</a></li>
+      <li style="margin-bottom: 16px;"><a routerLink="/item">Item</a></li>
+       <li style="margin-bottom: 16px;"><a routerLink="/sale">Sale Book</a></li>
+        <li style="margin-bottom: 16px;"><a routerLink="/purchase">Purchase Book</a></li>
+       <li style="margin-bottom: 16px;"><a routerLink="/stockItem">Stock Item</a></li>
+      <li><a routerLink="/products">Products</a></li>
+    </ul>
+  </nav>
+  <div class="content" role="main" style="flex: 1;">
     <router-outlet></router-outlet>
   </div>
+</div>
 
 
   <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">

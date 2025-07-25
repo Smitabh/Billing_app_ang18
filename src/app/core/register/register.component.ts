@@ -1,12 +1,15 @@
 
 
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
+  standalone:true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass']
 })
@@ -14,11 +17,11 @@ export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
   submitted = false;
 
-
   ngOnInit() {
     this.registerForm = this.fb.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
+      title:['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, this.strictEmailValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
@@ -57,11 +60,13 @@ export class RegisterComponent implements OnInit{
       this.submitted = true;
      if (this.registerForm.invalid) return;
 
-    const formData = this.registerForm.value;
-      this.authService.register({ formData }).subscribe(response => {
+      this.authService.register({ ...this.registerForm.value }).subscribe(response => {
         alert(response.message);
+        console.log("Registration successful:", response);
         this.router.navigate(['/login']);
-      });
+      }, (err => {
+        console.log("Error: ", err);
+      }));
     }
 
 }

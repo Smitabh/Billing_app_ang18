@@ -1,0 +1,94 @@
+
+<div class="container">
+  <div *ngIf="showDiv">
+    <form>
+      <h2 style="align-items: center;">Book Information</h2>
+
+      <div class="form-row">
+        <label>Book Name:</label>
+          <input [(ngModel)]="newBook.bookName" name="bookName" required class="inputTxt">
+      </div>
+      <div class="form-row">
+        <label>Book Code:</label>
+        <input [(ngModel)]="newBook.bookCode" name="bookCode" required class="inputTxt">
+      </div>
+
+      <div class="form-row">
+        <label>Book Cost:</label>
+        <input [(ngModel)]="newBook.bookCost" name="bookCost" required class="inputTxt">
+      </div>
+
+      <div class="form-row">
+        <label>Book Unit:</label>
+        <input [(ngModel)]="newBook.bookUnit" name="bookUnit" required class="inputTxt">
+      </div>
+      <div class="form-row">
+        <label>Language:</label>
+          <select class="form-control" [(ngModel)]="newBook.languageId" name="languageId" required>
+            <option value="">-- Choose Language --</option>
+            <option *ngFor="let lang of languages" [value]="lang._id" >
+              {{ lang.languageName }}
+            </option>
+          </select>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">  
+        {{errorMessage}}
+      </div>
+      <div class="button-container">
+        <button class="auto-button"(click)="saveBook()" >Add</button>
+        <button class="auto-button" (click)="update(newBook.bookName)">Update</button>
+      </div>
+    </form>
+  </div>
+
+ <div *ngIf="hideDiv">
+  <div class="table-container">
+   <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+      <div class="button-container"><button class="auto-button" (click)="addBook()" >Add New Book</button></div>
+        <div *ngIf="successMessage" class="success-message"> {{ successMessage }} </div>
+        <div class="container">
+          <div class="search-box mb-3">
+            <input type="text" class="form-control" placeholder="Search...." [(ngModel)]="searchTerm" (input)="searchBooks()" />
+          </div>
+
+          <div class="table-responsive table-container">
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="table-primary">
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Book Name</th>
+                  <th>Book code</th>
+                  <th>Book cost</th>
+                  <th>Book unit </th>
+                  <th>Book Date</th>
+                  <th>Language</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="bookList.length > 0">
+               <tr *ngFor="let obj of bookList; let i = index">
+                 
+                  <td>{{ (p - 1) * itemsPerPage + i + 1 }}</td>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ obj.bookName }}</td>
+                  <td>{{ obj.bookCode }}</td>
+                  <td>{{ obj.bookCost }}</td>
+                  <td>{{ obj.bookUnit }}</td>
+                  
+                  <td>{{ obj.bookcreatedDate | date: 'yyyy-MM-dd' }}</td>
+                  <td>{{ getLanguageName(obj.languageId) }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary me-1" (click)="editBook(i, obj.bookName)" title="Edit">
+                      <i class="bi bi-pencil-fill" ></i>  </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteBook(i)" title="Delete">
+                      <i class="bi bi-trash-fill"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+              
+            </table>
+          </div>
+        </div>
+    </div>  
+  </div> 
+</div>  

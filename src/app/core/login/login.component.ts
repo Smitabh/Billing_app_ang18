@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
+  errorMessage : string = '';
 
   constructor(private fb: FormBuilder, private router: Router,private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -26,14 +27,29 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
+    const username = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
 
-    this.authService.login({ username: this.loginForm.value.username, password: this.loginForm.value.password })
-    .subscribe(response => {
+    if (!username && !password) {
+      this.errorMessage = 'Username and Password are required';
+      return;
+    }
+    if (!username) {
+      this.errorMessage = 'Username is required';
+      return;
+    }
+    if (!password) {
+      this.errorMessage = 'Password is required';
+      return;
+    }
+   this.authService.login({ username, password }).subscribe(response => {
       if (response.token) {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/dashboard']);
       } else {
-        alert('Invalid credentials');
+        setTimeout(() => {
+          this.errorMessage = 'Invalid credentials';
+        }, 3000);
       }
     });
   } 

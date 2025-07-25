@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,15 +10,13 @@ import { RegisterComponent } from './core/register/register.component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { LoaderComponent } from './core/loader/loader.component';
 import { SuccessNotificationComponent } from './core/success-notification/success-notification.component';
-import { ErrorNotificationComponent } from './core/error-notification/error-notification.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorNotificationComponent } from './core/error-notification/error-notification.component'; 
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    LoginComponent, 
     DashboardComponent,
     LoaderComponent,
     SuccessNotificationComponent,

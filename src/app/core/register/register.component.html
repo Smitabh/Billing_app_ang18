@@ -1,51 +1,86 @@
-
-<div class="container">
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <div class="form-row">
-        <label>First Name:</label>
-        <input type="text" formControlName="fname" class="inputTxt">
-        <div *ngIf="submitted && f['fname'].errors" class="error-message">
-           <!--f Shortcut for this.registerForm.controls-->
-            <small *ngIf="f['fname'].errors['required']">First Name is required</small>
+<div class="container mx-auto max-w-2xl p-4 sm:p-6 bg-white rounded shadow">
+  <h2 class="text-xl font-bold mb-6 text-center">Register Information</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="space-y-4">
+    
+    <!-- Row Item Template -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2">Title:</label>
+      <div>
+        <select formControlName="title" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+          <option value="" disabled selected>Select Title</option>
+          <option value="Mr">Mr</option>
+          <option value="Ms">Ms</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Dr">Dr</option>
+        </select>
+        <div *ngIf="submitted && f['title'].errors" class="text-red-500 text-sm mt-1">
+          <small *ngIf="f['title'].errors['required']">Title is required</small>
         </div>
+      </div>
     </div>
-    <div class="form-row">
-        <label>Last Name:</label>
-        <input type="text" formControlName="lname" class="inputTxt"/>
-        <div *ngIf="submitted && f['lname'].errors" class="error-message">
-          <small *ngIf="f['lname'].errors['required']">Last Name is required</small>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Email ID:</label>
-        <input type="email" formControlName="email" class="inputTxt">
-        <div *ngIf="submitted && f['email'].errors" class="error-message">
-          <small *ngIf="f['email'].errors['required']">Email is required</small>
-          <small *ngIf="f['email'].errors['invalidEmailDomain']">Email must end with .com, .in, .net, or .org</small>
-        </div>
-      </div>
 
-      <div  class="form-row">
-        <label>Password:</label>
-        <input type="password" formControlName="password" class="inputTxt"/>
-        <div *ngIf="submitted && f['password'].errors" class="error-message">
+    <!-- First Name -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2"><b>First Name:</b></label>
+      <div>
+        <input type="text" formControlName="firstName" name="firstName" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+        <div *ngIf="submitted && f['firstName'].errors" class="text-red-500 text-sm mt-1">
+          <small *ngIf="f['firstName'].errors['required']">First Name is required</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2"><b>Last Name:</b></label>
+      <div>
+        <input type="text" formControlName="lastName" name="lastName" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+        <div *ngIf="submitted && f['lastName'].errors" class="text-red-500 text-sm mt-1">
+          <small *ngIf="f['lastName'].errors['required']">Last Name is required</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2"><b>Email:</b></label>
+      <div>
+        <input type="email" formControlName="email" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+        <div *ngIf="submitted && f['email'].errors" class="text-red-500 text-sm mt-1">
+          <small *ngIf="f['email'].errors['required']">Email is required</small>
+          <small *ngIf="f['email'].errors['invalidEmailDomain']">Invalid email domain</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2"><b>Password:</b></label>
+      <div>
+        <input type="password" formControlName="password" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+        <div *ngIf="submitted && f['password'].errors" class="text-red-500 text-sm mt-1">
           <small *ngIf="f['password'].errors['required']">Password is required</small>
           <small *ngIf="f['password'].errors['minlength']">Minimum 6 characters</small>
         </div>
       </div>
-      <div class="form-row">
-        <label>Confirm Password:</label>
-        <input type="password" formControlName="confirmPassword" class="inputTxt" />
+    </div>
 
-        <div *ngIf="submitted && (f['confirmPassword'].errors || registerForm.hasError('passwordsMismatch'))" class="error-message">
+    <!-- Confirm Password -->
+    <div class="grid grid-cols-2 items-center gap-4">
+      <label class="font-semibold text-sm text-right pr-2"><b>Confirm Password:</b></label>
+      <div>
+        <input type="password" formControlName="confirmPassword" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+        <div *ngIf="submitted && (f['confirmPassword'].errors || registerForm.hasError('passwordsMismatch'))" class="text-red-500 text-sm mt-1">
           <small *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password is required</small>
           <small *ngIf="registerForm.hasError('passwordsMismatch')">Passwords do not match</small>
         </div>
       </div>
-      <div class="button-container">
-        <button type="submit" class="btn">Register</button>
-      </div>
-   
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-center mt-6 col-span-2">
+      
+    </div>
+    <div class="button-container"><button type="submit" class="auto-button">Register</button></div>
   </form>
-</div>  
-  
+</div>
